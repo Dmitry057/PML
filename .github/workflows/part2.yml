@@ -104,5 +104,5 @@ jobs:
 
           git add part2/reports/best_model_report.md
           # Possible error
-          git commit "Я УМНИИИИИИ"
+          git commit -m "Я УМНИИИИИИ"
           git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git HEAD:${{ github.ref_name }}
