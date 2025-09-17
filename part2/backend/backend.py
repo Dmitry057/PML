@@ -18,9 +18,12 @@ def health_check():
   
 @app.post("/predict", tags=['predict'])
 def predict(sample: SampleSchema):
-    # Possible error
-    df = pd.DataFrame([dict(sample)])
-    return {"prediction": 0}
+    try:
+        df = pd.DataFrame([sample.dict()])
+        prediction = model.predict(df)[0]
+        return {"prediction": int(prediction)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
   
 @app.post("/predict_batch", tags=['predict'])
 def predict_batch(file: UploadFile):
